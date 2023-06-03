@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Timestamp Dropdown</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="panel" id="leftPanel">
+    <h2>Upload File</h2>
+    <input type="file" id="fileUpload" accept=".dat">
+  </div>
+  <div class="panel" id="rightPanel">
+    <h2>Select Date</h2>
+    <select id="dateDropdown">
+      <option>Select a date</option>
+    </select>
+    <h2>Select Time</h2>
+    <select id="timeDropdown">
+      <option>Select a time</option>
+    </select>
+    <div id="timestampInfo"></div>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>

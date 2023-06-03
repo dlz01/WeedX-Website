@@ -1,0 +1,17 @@
+.panel {
+    float: left;
+    width: 50%;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  #map {
+    height: 100%;
+  }
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
