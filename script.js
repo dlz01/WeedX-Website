@@ -134,3 +134,69 @@ $('#fileUpload').on('change', function(event) {
 function displayFileContents(content) {
   $("#timestampInfo").append(content + "\n");
 }
+
+function initMap() {
+	var mapOptions = {
+		center: new google.maps.LatLng(42.2921818, -83.7129083),
+		zoom: 11
+	};
+	var googlemap = new google.maps.Map(document.getElementById("map"), mapOptions);
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(42.2921818, -83.7129083),
+		map: googlemap
+	});
+}
+
+/* globals Chart:false, feather:false */
+
+(function () {
+	'use strict'
+  
+	feather.replace()
+  
+	// Graphs
+	var ctx = document.getElementById('myChart')
+	// eslint-disable-next-line no-unused-vars
+	var myChart = new Chart(ctx, {
+	  type: 'line',
+	  data: {
+		labels: [
+		  'Sunday',
+		  'Monday',
+		  'Tuesday',
+		  'Wednesday',
+		  'Thursday',
+		  'Friday',
+		  'Saturday'
+		],
+		datasets: [{
+		  data: [
+			15339,
+			21345,
+			18483,
+			24003,
+			23489,
+			24092,
+			12034
+		  ],
+		  lineTension: 0,
+		  backgroundColor: 'transparent',
+		  borderColor: '#007bff',
+		  borderWidth: 4,
+		  pointBackgroundColor: '#007bff'
+		}]
+	  },
+	  options: {
+		scales: {
+		  yAxes: [{
+			ticks: {
+			  beginAtZero: false
+			}
+		  }]
+		},
+		legend: {
+		  display: false
+		}
+	  }
+	})
+  })()
