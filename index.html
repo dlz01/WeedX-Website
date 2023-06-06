@@ -12,11 +12,9 @@
       <input type="file" id="fileUpload" accept=".dat" multiple>
       <div id="map">
         <iframe
-          width="470"
-          height="380"
           style="border:0"
           loading="lazy"
-          allowfullscreen
+          allow="fullscreen"
           referrerpolicy="no-referrer-when-downgrade"
           src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDhsI9-_E4GH3Z0O9iwHTnEsFYp06glOmk
             &q=42.29671458723321, -83.72128727212987&center=42.2921818,-83.7129083&zoom=12">
@@ -33,7 +31,9 @@
         <option>Select a time</option>
       </select>
       <div id="timestampInfo"></div>
-      <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="2150" height="1000" style="display: block; height: 453px; width: 1075px;"></canvas>
+      <div class="chart">
+        <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="2150" height="1000" style="display: block; height: 453px; width: 1075px;"></canvas>
+      </div>
     </div>
   </div>
   
