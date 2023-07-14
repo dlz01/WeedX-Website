@@ -16,6 +16,24 @@ var $ = jQuery = require('jquery')(window);
 let fileToTime = new Map; // key: filename, val: map(timestamp -> data)
 let fileToCat = new Map; // key: filename, val: categories array
 let func = "";
+let labels = [
+    '2023-05-31 00:15:00',
+    '2023-05-31 00:30:00',
+    '2023-05-31 00:45:00',
+    '2023-05-31 01:00:00',
+    '2023-05-31 01:15:00',
+    '2023-05-31 01:30:00',
+    '2023-05-31 01:45:00'
+  ];
+let data = [
+    8.79,
+    8.7,
+    8.19,
+    7.499,
+    7.211,
+    8.35,
+    8.44
+  ];
 
 app.get("/", function (req, res) {
     let contents = [];
@@ -30,7 +48,7 @@ app.get("/", function (req, res) {
         let lonIdx = cat.indexOf("Longitude");
         latlon = [datas[latIdx], datas[lonIdx]];
     }
-    res.render("index", {contents: contents, latlon: latlon, func: func});
+    res.render("index", {contents: contents, latlon: latlon, func: func, fileToTime: fileToTime, labels: labels, data: data});
 })
 app.post('/upload', function(req, res) {
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -63,7 +81,18 @@ app.post('/upload', function(req, res) {
             let line = lines[i].split(",");
             timeMap.set(line[0].replace(/"/g, ''), line.slice(1));
         }
-        func = "plotChart();"
+
+        const iterator = timeMap.entries();
+        data = [
+            iterator.next().value[1][3],
+            iterator.next().value[1][3],
+            iterator.next().value[1][3],
+            iterator.next().value[1][3],
+            iterator.next().value[1][3],
+            iterator.next().value[1][3],
+            iterator.next().value[1][3],
+          ];
+        func = "plotChart(l, d);"
         res.redirect('/');
     });
   });

@@ -28,10 +28,18 @@
     <div id="content-panel">
       <select id="fileDropdown">
         <option>Select a file</option>
+        <!-- <% var fileToTime = fileToTime; %> -->
+        <% var test = "test"; %>
+        <% for(var i=0; i < fileToTime.size; i++) { %>
+          <option value="<%= Array.from(fileToTime.keys())[i] %>"><%= Array.from(fileToTime.keys())[i] %></option>
+        <% } %>
       </select>
       <!-- <h2>Select Time</h2> -->
       <select id="timeDropdown">
         <option>Select a time</option>
+        <!-- <% for(var i=0; i < fileToTime.size.length; i++) { %>
+          <option value="<%= Array.from(fileToTime.keys())[i] %>"><%= Array.from(fileToTime.keys())[i] %></option>
+        <% } %> -->
       </select>
       <div id="timestampInfo">
         <% for (i = 0; i < contents.length; i++) { %>
@@ -50,11 +58,32 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
   <script src="script.js"></script>
+  <script defer>
+    var fileToTime = <%- JSON.stringify(Object.fromEntries(fileToTime)) %>;
+    
+    function populateDropdown(selector, values) {
+      var dropdown = $(selector);
+      dropdown.empty();
+      $.each(values, function(index, value) {
+        dropdown.append($('<option></option>').attr('value', value).text(value));
+      });
+    }
+    $(document).on('change','#fileDropdown', function()
+    {
+        console.log("here");
+    });
+    // console.log(<%=fileToTime%>);
+    $('#fileDropdown').on('change', function(event) {
+      console.log($('#fileDropdown').val());
+      console.log(Object.entries(fileToTime));
+      // populateDropdown('#timeDropdown', fileToTime[$('#fileDropdown').val()]);
+    })
+  </script>
   <!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhsI9-_E4GH3Z0O9iwHTnEsFYp06glOmk&callback=initMap">
   </script> -->
   <script>
-    function plotChart() {
+    function plotChart(labels, data) {
 	'use strict'
   
 	feather.replace()
@@ -65,25 +94,9 @@
 	var myChart = new Chart(ctx, {
 	  type: 'line',
 	  data: {
-		labels: [
-		  '2023-05-31 00:15:00',
-		  '2023-05-31 00:30:00',
-		  '2023-05-31 00:45:00',
-		  '2023-05-31 01:00:00',
-		  '2023-05-31 01:15:00',
-		  '2023-05-31 01:30:00',
-		  '2023-05-31 01:45:00'
-		],
+		labels: labels,
 		datasets: [{
-		  data: [
-			8.79,
-			8.7,
-			8.19,
-			7.499,
-			7.211,
-			8.35,
-			8.44
-		  ],
+		  data: data,
 		  lineTension: 0,
 		  backgroundColor: 'transparent',
 		  borderColor: '#007bff',
@@ -105,6 +118,8 @@
 	  }
 	})
   }
+  let d = <%-JSON.stringify(data) %>;
+  let l = <%-JSON.stringify(labels) %>;
   <%= func %>
   </script>
 </body>
